@@ -42,25 +42,24 @@ int main(){
     for (int i=0, i < cont, i++)
     {
         fread(v[i], sizeof(struct encabezado), 1, f);
-        i++;
     }
     
-    printf("SampleRate:     %d\n",v.SampleRate);
-    printf("SampleCount:   %d\n",v.SampleCount);
+    printf("SampleRate:     %d\n",v.sample.SampleRate);
+    printf("SampleCount:   %d\n",v.sample.SampleCount);
     
     uint32_t rate;
-    if (v.SampleRate == 0){
+    if (v.sample.SampleRate == 0){
         rate = 32000;
-    }else if(v.SampleRate == 1){
+    }else if(v.sample.SampleRate == 1){
         rate = 44100;
-    }else if (v.SampleRate == 2){
+    }else if (v.sample.SampleRate == 2){
         rate = 48000; 
-    }else if(v.SampleRate == 3){
+    }else if(v.sample.SampleRate == 3){
         rate = 88200;
     }
     
-    fread(audio, sizeof(float), v.SampleCount, f);
-     play_audio(rate, v.SampleCount, audio);
+    fread(audio, sizeof(float), v.sample.SampleCount, f);
+    play_audio(rate, v.sample.SampleCount, audio);
     
     free(audio);
     fclose(f);
